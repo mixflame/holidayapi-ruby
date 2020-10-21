@@ -31,6 +31,75 @@ module HolidayAPI
         return JSON.parse(response.body)
       end
     end
+
+    def countries(params = Hash.new)
+      if !params.has_key?('key')
+        params['key'] = @key
+      end
+
+      uri = Addressable::URI.new
+      uri.query_values = params
+
+      uri = URI("https://holidayapi.com/v1/countries?#{uri.query}")
+
+      Net::HTTP.start(
+        uri.host,
+        uri.port,
+        :use_ssl => true,
+        :verify_mode => OpenSSL::SSL::VERIFY_NONE
+      ) do |http|
+        request = Net::HTTP::Get.new uri
+
+        response = http.request request
+        return JSON.parse(response.body)
+      end
+    end
+
+    def languages(params = Hash.new)
+      if !params.has_key?('key')
+        params['key'] = @key
+      end
+
+      uri = Addressable::URI.new
+      uri.query_values = params
+
+      uri = URI("https://holidayapi.com/v1/languages?#{uri.query}")
+
+      Net::HTTP.start(
+        uri.host,
+        uri.port,
+        :use_ssl => true,
+        :verify_mode => OpenSSL::SSL::VERIFY_NONE
+      ) do |http|
+        request = Net::HTTP::Get.new uri
+
+        response = http.request request
+        return JSON.parse(response.body)
+      end
+    end
+
+    def workday(params = Hash.new)
+      if !params.has_key?('key')
+        params['key'] = @key
+      end
+
+      uri = Addressable::URI.new
+      uri.query_values = params
+
+      uri = URI("https://holidayapi.com/v1/workday?#{uri.query}")
+
+      Net::HTTP.start(
+        uri.host,
+        uri.port,
+        :use_ssl => true,
+        :verify_mode => OpenSSL::SSL::VERIFY_NONE
+      ) do |http|
+        request = Net::HTTP::Get.new uri
+
+        response = http.request request
+        return JSON.parse(response.body)
+      end
+    end
   end
 end
 
